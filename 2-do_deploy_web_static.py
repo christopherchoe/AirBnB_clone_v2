@@ -28,11 +28,15 @@ def do_deploy(archive_path):
     """
     uploads archive, uncompresses, and creates new symbolic links
     """
+    if local('test -f ' + archive_path).failed:
+        return False
     if put(archive_path, "/tmp/").failed:
         return False
-    cp_path = ' data/web_static/releases/' + archive_path[:-4]
+    cp_path = ' /data/web_static/releases/' + archive_path[9:-4]
     tmp_path = '/tmp/' + archive_path[9:]
-    if sudo('mkdir -p' + cp_path).failed:
+    if sudo('mkdir -p /data/web_static/releases/').failed:
+        return False
+    if sudo('mkdir -p ' + cp_path).failed:
         return False
     if sudo("tar zxvf " + tmp_path + ' -C' + cp_path).failed:
         return False
