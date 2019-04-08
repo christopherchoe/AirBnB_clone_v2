@@ -6,15 +6,12 @@ from fabric.api import *
 import datetime
 
 
-env.hosts = ['34.73.105.249']
-
-
 def do_pack():
     """
     packs content of web_static/ into a tgz archive
     """
     now = datetime.datetime.now()
-    tgz_path = 'web_static_' + now.strftime('%y%m%d%H%M%S')
+    tgz_path = 'web_static_' + now.strftime('%Y%m%d%H%M%S')
     tgz_cmd = 'tar -czpvf versions/' + tgz_path + ' web_static'
     local('sudo mkdir -p versions')
 
