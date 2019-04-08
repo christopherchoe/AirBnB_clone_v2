@@ -32,10 +32,9 @@ def do_deploy(archive_path):
         return False
     if put(archive_path, "/tmp/").failed:
         return False
-    cp_path = ' /data/web_static/releases/' + archive_path[9:-4]
-    tmp_path = '/tmp/' + archive_path[9:]
-    if sudo('mkdir -p /data/web_static/releases/').failed:
-        return False
+    splitpath = archive_path.split('/')
+    cp_path = ' /data/web_static/releases/' + (splitpath[-1])[:-4]
+    tmp_path = '/tmp/' + splitpath[-1]
     if sudo('mkdir -p ' + cp_path).failed:
         return False
     if sudo("tar zxvf " + tmp_path + ' -C' + cp_path).failed:
