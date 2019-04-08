@@ -39,6 +39,10 @@ def do_deploy(archive_path):
         return False
     if sudo("tar zxvf " + tmp_path + ' -C' + cp_path).failed:
         return False
+    if sudo('mv ' + cp_path + '/web_static/* ' + cp_path).failed:
+        return False
+    if sudo('rm -rf ' + cp_path + '/web_static').failed:
+        return False
     if sudo('rm ' + tmp_path).failed:
         return False
     if sudo('rm -rf /data/web_static/current').failed:
