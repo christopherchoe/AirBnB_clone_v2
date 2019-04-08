@@ -5,6 +5,7 @@ generates .tgz archive and deploys
 from fabric.api import *
 from fabric.contrib.files import exists
 import datetime
+import os
 
 
 env.hosts = ['35.196.70.29', '34.73.105.249']
@@ -28,25 +29,23 @@ def do_deploy(archive_path):
     """
     uploads archive, uncompresses, and creates new symbolic links
     """
-    if local('test -f ' + archive_path).failed:
+    if not os.path.isfile(archive_path):
         return False
-    if put(archive_path, "/tmp/").failed:
-        return False
+    put(archive_path, "/tmp/")
     splitpath = archive_path.split('/')
     cp_path = ' /data/web_static/releases/' + (splitpath[-1])[:-4]
     tmp_path = '/tmp/' + splitpath[-1]
     if sudo('mkdir -p ' + cp_path).failed:
         return False
-    if sudo("tar zxvf " + tmp_path + ' -C' + cp_path).failed:
+    if sudo("tar -xvf " + tmp_path + ' -C' + cp_path).failed:
         return False
     if sudo('mv ' + cp_path + '/web_static/* ' + cp_path).failed:
         return False
     if sudo('rm -rf ' + cp_path + '/web_static').failed:
         return False
-    if sudo('rm ' + tmp_path).failed:
-        return False
     if sudo('rm -rf /data/web_static/current').failed:
         return False
-    if sudo('ln -sf ' + cp_path + ' /data/web_static/current').failed:
+    if sudo('ln -s ' + cp_path + ' /data/web_static/current').failed:
         return False
+    print('New version deployed!')
     return True
