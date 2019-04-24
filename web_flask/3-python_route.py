@@ -30,8 +30,9 @@ def c_text(text):
     return 'C %s' % str(text).replace('_', ' ')
 
 
-@app.route('/python/(<text>)', strict_slashes=False)
-def python_text(text='is cool')
+@app.route('/python/')
+@app.route('/python/<text>', strict_slashes=False)
+def python_text(text='is cool'):
     """
     display Python followed by text variable
     """
