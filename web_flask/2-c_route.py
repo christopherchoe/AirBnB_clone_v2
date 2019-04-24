@@ -13,6 +13,7 @@ def hello_hbnb():
     """
     return 'Hello HBNB!'
 
+
 @app.route('/hbnb', strict_slashes=False)
 def hbnb():
     """
@@ -20,12 +21,13 @@ def hbnb():
     """
     return 'HBNB'
 
+
 @app.route('/c/<text>', strict_slashes=False)
 def c_text():
     """
     display C followed by text variable
     """
-    return 'C {}'.format(text.replace('_', ' ')
+    return 'C {}'.format(text.replace('_', ' '))
 
 if __name__ == '__main__':
     app.run()
