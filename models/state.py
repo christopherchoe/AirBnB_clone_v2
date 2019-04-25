@@ -25,6 +25,7 @@ class State(BaseModel, Base):
             all_cities = models.storage.all(City)
             cities = []
             for k, v in all_cities.items():
-                if v.__state_id__ == self.id:
+                print('HELLO {}'.format(v))
+                if v.state_id == self.id:
                     cities.append(v)
             return cities
