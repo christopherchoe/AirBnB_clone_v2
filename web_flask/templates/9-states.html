@@ -9,7 +9,7 @@
 				{% if item.id == id %}
 					<H1>State: {{ item.name }}</H1>
 					<H3>Cities:</H3>
-					</UL>
+					<UL>
 					{% for city in item.cities |sort(attribute="name") %}
 						<LI>{{ city.id }}: <B>{{city.name }}</B></LI>
 					{% endfor %}
