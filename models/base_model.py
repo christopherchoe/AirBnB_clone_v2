@@ -29,6 +29,7 @@ class BaseModel:
             created_at: creation date
             updated_at: updated date
         """
+        self.created_at = self.updated_at = datetime.now()
         if kwargs:
             if 'id' not in kwargs.items():
                 self.id = str(uuid.uuid4())
@@ -39,7 +40,6 @@ class BaseModel:
                     setattr(self, key, value)
         else:
             self.id = str(uuid.uuid4())
-            self.created_at = self.updated_at = datetime.now()
 
     def __str__(self):
         """returns a string
