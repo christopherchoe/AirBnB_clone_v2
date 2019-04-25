@@ -21,12 +21,14 @@ def teardown_db(self):
 def cities_by_states():
     """display cities by state in html
     """
-    if os.getenv('DB_STORAGE') != 'db':
-        states = storage.all(State).values()
+    if os.getenv('HBNB_TYPE_STORAGE') != 'db':
+        return render_template(
+            '8-cities_by_states.html', states=storage.all(State).values())
     else:
-        states = storage.all("State").values()
-    return render_template(
-        '8-cities_by_states.html', states=states)
+        print('why')
+        print(storage.all("State").values())
+        return render_template(
+            '8-cities_by_states.html', states=storage.all("State").values())
 
 if __name__ == '__main__':
     app.run()
