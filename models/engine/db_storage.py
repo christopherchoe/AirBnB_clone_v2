@@ -37,16 +37,16 @@ class DBStorage:
         """ query on current db session all objects depending on class name
             Return: dictionary with <class-name>.<object-id> : <object>
         """
+        class_list = [State, City, User, Place, Review, Amenity]
         obj_dict = {}
+        classes = []
         if cls is None:
-            classes = self.__session.query(State).all()
-            classes += self.__session.query(City).all()
-            classes += self.__session.query(User).all()
-            classes += self.__session.query(Place).all()
-            classes += self.__session.query(Review).all()
-            classes += self.__session.query(Amenity).all()
+            for clas in class_list:
+                classes += self.__session.query(clas).all()
         else:
-            classes = self.__session.query(cls).all()
+            for clas in class_list:
+                if cls == clas.__name__:
+                    classes = self.__session.query(clas).all()
         for obj in classes:
             key = obj.__class__.__name__ + '.' + str(obj.id)
             obj_dict[key] = obj
@@ -81,4 +81,4 @@ class DBStorage:
     def close(self):
         """ remove on private session attribute
         """
-        self.__session.remove()
+        self.__session.close()
