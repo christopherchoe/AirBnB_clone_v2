@@ -12,17 +12,17 @@
 					</UL>
 					{% for city in item.cities %}
 					<LI>{{ city.id }}: <B>{{city.name }}</B></LI>
+					{% endfor %}
 					</UL>
 				{% else %}
 					<H1>Not Found!</H1>
 				{% endif %}
+			{% endfor %}
 		{% else %}
 			<H1>States</H1>
 			<UL>
 			{% for item in states |sort(attribute="name") %}
 				<LI>{{ item.id }}: <B>{{ item.name }}</B>
-					<UL>
-					</UL>
 				</LI>
 			{% endfor %}
 			</UL>

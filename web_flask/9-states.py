@@ -29,8 +29,8 @@ def cities_by_states(id=None):
     if id is not None:
         found = False
         for i in states:
+            states = [i]
             if id == i.id:
-                states = [i]
                 break
         return render_template(
             '9-states.html', states=states, id=id)
