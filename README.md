@@ -1,3 +1,5 @@
+This is the second version of the AirBnB Clone that imitates a lodging rental site, to visit the previous version visit [AirBnB Clone v1](https://github.com/christopherchoe/AirBnB_clone)
+
 # HBNB
 
 This is the console /command interpreter for the Holberton Airbnb clone project. The console can be used to store objects in and retrieve objects from a JSON.
